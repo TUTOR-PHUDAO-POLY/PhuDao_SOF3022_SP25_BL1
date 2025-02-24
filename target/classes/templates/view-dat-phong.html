@@ -5,33 +5,45 @@
     <title>Title</title>
 </head>
 <body>
-<select>
-    <option th:each="kh : ${listKhachHang}">
-        <span th:value="${kh.id}" th:text="${kh.ma1}"></span>
-    </option>
-</select>
+<form method="post" action="/dat-phong/add">
+    Ma dat phong: <input type="text" name="maDatPhong" th:value="${datPhong.ma}"/>
+    <br/>
+    Ma khach hang:
+    <select name="maKhachHang">
+        <option th:each="kh : ${listKhachHang}">
+            <span th:value="${kh.id}" th:text="${kh.ma1}"></span>
+        </option>
+    </select>
+    <br/>
+    Ten dat phong: <input type="text" name="tenDatPhong" th:value="${datPhong.ten}"/>
+    <br/>
+    <button type="submit">Add</button>
+</form>
 <table>
     <thead>
-        <tr>
-            <th>#</th>
-            <th>Ma dat phong</th>
-            <th>Ma khach hang</th>
-            <th>Ten phong dat</th>
-            <th>Ngay tao</th>
-            <th>Trang thai </th>
-            <th>Hoat dong</th>
-        </tr>
+    <tr>
+        <th>#</th>
+        <th>Ma dat phong</th>
+        <th>Ma khach hang</th>
+        <th>Ten phong dat</th>
+        <th>Ngay tao</th>
+        <th>Trang thai</th>
+        <th>Hoat dong</th>
+    </tr>
     </thead>
     <tbody>
-        <tr th:each="dh,index : ${listDatPhong}">
-            <td th:text="${index.count}"></td>
-            <td th:text="${dh.ma}"></td>
-            <td th:text="${dh.khachHang.ma1}"></td>
-            <td th:text="${dh.ten}"></td>
-            <td th:text="${dh.ngayTao}"></td>
-            <td th:text="${dh.trangThai}"></td>
-            <td></td>
-        </tr>
+    <tr th:each="dh,index : ${listDatPhong}">
+        <td th:text="${index.count}"></td>
+        <td th:text="${dh.ma}"></td>
+        <td th:text="${dh.khachHang.ma1}"></td>
+        <td th:text="${dh.ten}"></td>
+        <td th:text="${dh.ngayTao}"></td>
+        <td th:text="${dh.trangThai}"></td>
+        <td>
+            <a th:href="@{/dat-phong/detail/{id1}(id1=${dh.id})}">Detail</a>
+            <a th:href="@{/dat-phong/remove/{id2}(id2=${dh.id})}">Remove</a>
+        </td>
+    </tr>
     </tbody>
 </table>
 </body>
